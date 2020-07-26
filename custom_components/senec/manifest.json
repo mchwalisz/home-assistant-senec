@@ -1,0 +1,16 @@
+{
+  "domain": "senec",
+  "name": "senec",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/senec",
+  "requirements": [
+    "pysenec==0.1.0"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@mchwalisz"
+  ]
+}
