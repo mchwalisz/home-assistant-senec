@@ -1,7 +1,7 @@
 """Constants for the Senec integration."""
 from datetime import timedelta
 
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, POWER_WATT, UNIT_PERCENTAGE, VOLT
+from homeassistant.const import ENERGY_KILO_WATT_HOUR, POWER_WATT, PERCENTAGE, VOLT
 
 DOMAIN = "senec"
 
@@ -19,6 +19,6 @@ SENSOR_TYPES = {
     "solar_generated_power": [POWER_WATT, "mdi:solar-power"],
     "house_power": [POWER_WATT, "mdi:power-socket-europe"],
     "battery_state_power": [POWER_WATT, "mdi:car-battery"],
-    "battery_charge_percent": [UNIT_PERCENTAGE, "mdi:car-battery"],
+    "battery_charge_percent": [PERCENTAGE, "mdi:car-battery"],
     "grid_state_power": [POWER_WATT, "mdi:transmission-tower"],
 }
