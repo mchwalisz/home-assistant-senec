@@ -42,7 +42,12 @@ class SenecSensor(SenecEntity):
     @property
     def state(self):
         """Return the current state."""
-        return getattr(self.coordinator.senec, self._sensor)
+        value = getattr(self.coordinator.senec, self._sensor)
+        try:
+            rounded_value = round(float(value), 2)
+            return rounded_value
+        except ValueError:
+            return value
 
     @property
     def unit_of_measurement(self):
