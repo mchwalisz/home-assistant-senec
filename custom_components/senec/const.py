@@ -16,9 +16,12 @@ SCAN_INTERVAL = timedelta(seconds=60)
 """Supported sensor types."""
 
 SENSOR_TYPES = {
+    "system_state": ["", "mdi:solar-power"],
     "solar_generated_power": [POWER_WATT, "mdi:solar-power"],
-    "house_power": [POWER_WATT, "mdi:power-socket-europe"],
-    "battery_state_power": [POWER_WATT, "mdi:car-battery"],
-    "battery_charge_percent": [UNIT_PERCENTAGE, "mdi:car-battery"],
+    "house_power": [POWER_WATT, "mdi:home-import-outline"],
+    "battery_state_power": [POWER_WATT, "mdi:ev-station"],
+    "battery_charge_percent": [UNIT_PERCENTAGE, "mdi:ev-station"],
     "grid_state_power": [POWER_WATT, "mdi:transmission-tower"],
+    "grid_imported_power": [POWER_WATT, "mdi:transmission-tower"],
+    "grid_exported_power": [POWER_WATT, "mdi:transmission-tower"],
 }
