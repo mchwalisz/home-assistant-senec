@@ -2,7 +2,8 @@
   "domain": "senec",
   "name": "senec",
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/senec",
+  "documentation": "https://github.com/mchwalisz/home-assistant-senec/blob/master/README.md",
+  "issue_tracker": "https://github.com/mchwalisz/home-assistant-senec/issues",
   "requirements": [
     "pysenec==0.1.0"
   ],
