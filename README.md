@@ -11,6 +11,6 @@ TODO
 Copy all files from `custom_components/senec/` to `custom_components/senec/` inside your config Home Assistant directory.
 
 
-## Functionality
+### Enabling integration
 
-## Configuration
+Add custom integration using the web interface and follow instruction on screen
