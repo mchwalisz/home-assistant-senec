@@ -1,7 +1,7 @@
 """Constants for the Senec integration."""
 from datetime import timedelta
 
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT, VOLT
+from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT
 
 DOMAIN = "senec"
 
