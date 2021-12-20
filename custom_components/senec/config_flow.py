@@ -46,7 +46,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         except (OSError, HTTPError, Timeout):
             self._errors[CONF_HOST] = "cannot_connect"
             _LOGGER.error(
-                "Could not connect to Senec device at %s, check host ip address", host,
+                "Could not connect to Senec device at %s, check host ip address",
+                host,
             )
         return False
 
