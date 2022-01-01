@@ -20,6 +20,8 @@ SENSOR_TYPES = {
     "solar_generated_power": [POWER_WATT, "mdi:solar-power"],
     "house_power": [POWER_WATT, "mdi:home-import-outline"],
     "battery_state_power": [POWER_WATT, "mdi:ev-station"],
+    "battery_charge_power": [POWER_WATT, "mdi:ev-station"],
+    "battery_discharge_power": [POWER_WATT, "mdi:ev-station"],
     "battery_charge_percent": [PERCENTAGE, "mdi:ev-station"],
     "grid_state_power": [POWER_WATT, "mdi:transmission-tower"],
     "grid_imported_power": [POWER_WATT, "mdi:transmission-tower"],
