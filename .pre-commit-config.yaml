@@ -9,6 +9,19 @@ repos:
     rev: 21.12b0
     hooks:
     - id: black
+      args:
+      - --line-length=100
+      # these folders wont be formatted by black
+      - --exclude="""\.git |
+        \.__pycache__|
+        \.hg|
+        \.mypy_cache|
+        \.tox|
+        \.venv|
+        _build|
+        buck-out|
+        build|
+        dist"""
   - repo: https://github.com/PyCQA/isort
     rev: '5.10.1'
     hooks:
@@ -18,4 +31,7 @@ repos:
       require_serial: true
       language: python
       types: [python]
-      args: [--multi-line=3, --line-length=88]
+      args:
+      - --multi-line=3
+      - --line-length=100
+      - --profile=black
