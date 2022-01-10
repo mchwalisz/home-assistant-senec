@@ -22,3 +22,15 @@ Add custom integration using the web interface and follow instruction on screen.
 - Go to `Configuration -> Integrations` and add "Senec" integration
 - Provide name for the device and it's address (hostname or IP)
 - Provide area where the battery is located
+
+## Home Assistant Energy Dashboard
+
+This integration supports Home Assistant's [Energy Management](https://www.home-assistant.io/docs/energy/)
+
+Example setup:
+
+![Energy Dashboard Setup](images/energy_dashboard.png)
+
+Resulting energy distribution card:
+
+![Energy Distribution](images/energy_distribution.png)
