@@ -14,7 +14,7 @@ DOMAIN = "senec"
 
 
 """Default config for Senec."""
-DEFAULT_HOST = "senec"
+DEFAULT_HOST = "Senec"
 DEFAULT_NAME = "senec"
 
 """Fixed constants."""

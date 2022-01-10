@@ -34,3 +34,9 @@ class SenecSensor(SenecEntity, SensorEntity):
     ):
         """Initialize a singular value sensor."""
         super().__init__(coordinator=coordinator, description=description)
+
+        title = self.coordinator._entry.title
+        key = self.entity_description.key
+        name = self.entity_description.name
+        self.entity_id = f"sensor.{title}_{key}"
+        self._attr_name = f"{title} {name}"

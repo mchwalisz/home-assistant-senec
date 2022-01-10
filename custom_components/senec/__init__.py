@@ -56,6 +56,7 @@ class SenecDataUpdateCoordinator(DataUpdateCoordinator):
         self._host = entry.data[CONF_HOST]
         self.senec = Senec(self._host, websession=session)
         self.name = entry.title
+        self._entry = entry
 
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL)
 
@@ -91,7 +92,7 @@ class SenecEntity(Entity):
     ) -> None:
         """Initialize the Atag entity."""
         self.coordinator = coordinator
-        self._name = DOMAIN.title()
+        self._name = coordinator._entry.title
         self._state = None
 
         self.entity_description = description
