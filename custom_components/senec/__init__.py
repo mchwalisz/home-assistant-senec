@@ -10,8 +10,9 @@ from homeassistant.const import CONF_HOST, CONF_NAME, CONF_SCAN_INTERVAL
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.helpers.entity import Entity, EntityDescription
+from homeassistant.helpers.update_coordinator import (DataUpdateCoordinator,
+                                                      UpdateFailed)
 from pysenec import Senec
 
 from .const import DEFAULT_HOST, DEFAULT_NAME, DOMAIN, SCAN_INTERVAL
@@ -60,7 +61,7 @@ class SenecDataUpdateCoordinator(DataUpdateCoordinator):
         self.name = entry.title
 
         super().__init__(
-            hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=60)
+            hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL
         )
 
     async def _async_update_data(self):
@@ -88,11 +89,17 @@ async def async_unload_entry(hass, entry):
 class SenecEntity(Entity):
     """Defines a base Senec entity."""
 
-    def __init__(self, coordinator: SenecDataUpdateCoordinator, sensor: str) -> None:
+    _attr_should_poll = False
+
+    def __init__(
+        self, coordinator: SenecDataUpdateCoordinator, description: EntityDescription
+    ) -> None:
         """Initialize the Atag entity."""
         self.coordinator = coordinator
-        self._sensor = sensor
         self._name = DOMAIN.title()
+        self._state = None
+
+        self.entity_description = description
 
     @property
     def device_info(self) -> dict:
@@ -100,26 +107,22 @@ class SenecEntity(Entity):
         device = self._name
         return {
             "identifiers": {(DOMAIN, device)},
-            "name": "Senec Home Battery ",
+            "name": "Senec Home Battery",
             "model": "Senec",
             "sw_version": None,
             "manufacturer": "Senec",
         }
 
     @property
-    def name(self) -> str:
-        """Return the name of the entity."""
-        return self._name
-
-    @property
-    def should_poll(self) -> bool:
-        """Return the polling requirement of the entity."""
-        return False
-
-    # @property
-    # def unit_of_measurement(self):
-    #     """Return the unit of measurement of this entity, if any."""
-    #     return self.coordinator.atag.climate.temp_unit
+    def state(self):
+        """Return the current state."""
+        sensor = self.entity_description.key
+        value = getattr(self.coordinator.senec, sensor)
+        try:
+            rounded_value = round(float(value), 2)
+            return rounded_value
+        except ValueError:
+            return value
 
     @property
     def available(self):
@@ -129,7 +132,8 @@ class SenecEntity(Entity):
     @property
     def unique_id(self):
         """Return a unique ID to use for this entity."""
-        return f"{self._name}_{self._sensor}"
+        sensor = self.entity_description.key
+        return f"{self._name}_{sensor}"
 
     async def async_added_to_hass(self):
         """Connect to dispatcher listening for entity data notifications."""
@@ -138,5 +142,5 @@ class SenecEntity(Entity):
         )
 
     async def async_update(self):
-        """Update Atag entity."""
+        """Update entity."""
         await self.coordinator.async_request_refresh()
