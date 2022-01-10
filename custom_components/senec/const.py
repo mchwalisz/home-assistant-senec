@@ -3,10 +3,12 @@ from collections import namedtuple
 from datetime import timedelta
 from typing import Final
 
-from homeassistant.components.sensor import (SensorDeviceClass,
-                                             SensorEntityDescription,
-                                             SensorStateClass)
-from homeassistant.const import PERCENTAGE, POWER_WATT
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntityDescription,
+    SensorStateClass,
+)
+from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT
 
 DOMAIN = "senec"
 

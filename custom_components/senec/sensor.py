@@ -3,13 +3,12 @@ import logging
 
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
-from homeassistant.components.sensor import SensorEntity
-from homeassistant.components.sensor import SensorEntityDescription
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.typing import HomeAssistantType
 
 from . import SenecDataUpdateCoordinator, SenecEntity
-from .const import  DOMAIN, SENSOR_TYPES
+from .const import DOMAIN, SENSOR_TYPES
 
 _LOGGER = logging.getLogger(__name__)
 

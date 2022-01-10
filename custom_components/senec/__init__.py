@@ -11,8 +11,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.entity import Entity, EntityDescription
-from homeassistant.helpers.update_coordinator import (DataUpdateCoordinator,
-                                                      UpdateFailed)
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from pysenec import Senec
 
 from .const import DEFAULT_HOST, DEFAULT_NAME, DOMAIN, SCAN_INTERVAL
@@ -44,9 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     hass.data[DOMAIN][entry.entry_id] = coordinator
 
     for platform in PLATFORMS:
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(entry, platform)
-        )
+        hass.async_create_task(hass.config_entries.async_forward_entry_setup(entry, platform))
 
     return True
 
@@ -60,9 +57,7 @@ class SenecDataUpdateCoordinator(DataUpdateCoordinator):
         self.senec = Senec(self._host, websession=session)
         self.name = entry.title
 
-        super().__init__(
-            hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL
-        )
+        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL)
 
     async def _async_update_data(self):
         """Update data via library."""
@@ -137,9 +132,7 @@ class SenecEntity(Entity):
 
     async def async_added_to_hass(self):
         """Connect to dispatcher listening for entity data notifications."""
-        self.async_on_remove(
-            self.coordinator.async_add_listener(self.async_write_ha_state)
-        )
+        self.async_on_remove(self.coordinator.async_add_listener(self.async_write_ha_state))
 
     async def async_update(self):
         """Update entity."""

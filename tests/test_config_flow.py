@@ -1,7 +1,6 @@
 """Test the senec config flow."""
 from homeassistant import config_entries, setup
-from homeassistant.components.senec.config_flow import (CannotConnect,
-                                                        InvalidAuth)
+from homeassistant.components.senec.config_flow import CannotConnect, InvalidAuth
 from homeassistant.components.senec.const import DOMAIN
 
 from tests.async_mock import patch
@@ -19,9 +18,7 @@ async def test_form(hass):
     with patch(
         "homeassistant.components.senec.config_flow.PlaceholderHub.authenticate",
         return_value=True,
-    ), patch(
-        "homeassistant.components.senec.async_setup", return_value=True
-    ) as mock_setup, patch(
+    ), patch("homeassistant.components.senec.async_setup", return_value=True) as mock_setup, patch(
         "homeassistant.components.senec.async_setup_entry",
         return_value=True,
     ) as mock_setup_entry:
