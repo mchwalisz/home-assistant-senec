@@ -100,18 +100,18 @@ SENSOR_TYPES = [
         device_class=SensorDeviceClass.POWER,
         state_class=SensorStateClass.MEASUREMENT,
     ),
-    SensorEntityDescription(                          
+    SensorEntityDescription(
         key="wallbox_power",
         name="Wallbox Power",
-        native_unit_of_measurement=POWER_WATT,           
-        icon="mdi:car-arrow-left",            
-        device_class=SensorDeviceClass.POWER,            
-        state_class=SensorStateClass.MEASUREMENT,     
-    ), 
-    SensorEntityDescription(                             
-        key="wallbox_ev_connected",                             
-        name="Wallbox EV Connected",                                       
-        icon="mdi:car-electric",        
+        native_unit_of_measurement=POWER_WATT,
+        icon="mdi:car-arrow-left",
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
+    SensorEntityDescription(
+        key="wallbox_ev_connected",
+        name="Wallbox EV Connected",
+        icon="mdi:car-electric",
     ),
     SensorEntityDescription(
         key="house_total_consumption",
@@ -161,9 +161,9 @@ SENSOR_TYPES = [
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL_INCREASING,
     ),
-    SensorEntityDescription( 
-        key="wallbox_energy",      
-        name="Wallbox charged",          
+    SensorEntityDescription(
+        key="wallbox_energy",
+        name="Wallbox charged",
         native_unit_of_measurement=ENERGY_KILO_WATT_HOUR,
         icon="mdi:ev-station",
         device_class=SensorDeviceClass.ENERGY,
