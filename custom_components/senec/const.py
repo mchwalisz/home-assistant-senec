@@ -8,7 +8,7 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT
+from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT; TEMP_CELSIUS
 
 DOMAIN = "senec"
 
@@ -27,6 +27,24 @@ SENSOR_TYPES = [
         key="system_state",
         name="System State",
         icon="mdi:solar-power",
+    ),
+    SensorEntityDescription(
+        key="battery_temp",
+        name="Battery Temperature",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        icon="mdi:thermometer",
+    ),
+    SensorEntityDescription(
+        key="case_temp",
+        name="Case Temperature",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        icon="mdi:thermometer",
+    ),
+    SensorEntityDescription(
+        key="mcu_temp",
+        name="Controller Temperature",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        icon="mdi:thermometer",
     ),
     SensorEntityDescription(
         key="solar_generated_power",
