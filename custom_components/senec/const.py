@@ -8,7 +8,15 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT, ELECTRIC_POTENTIAL_VOLT, ELECTRIC_POTENTIAL_MILLIVOLT, TEMP_CELSIUS, ELECTRIC_CURRENT_AMPERE
+from homeassistant.const import (
+    ELECTRIC_CURRENT_AMPERE,
+    ELECTRIC_POTENTIAL_MILLIVOLT,
+    ELECTRIC_POTENTIAL_VOLT,
+    ENERGY_KILO_WATT_HOUR,
+    PERCENTAGE,
+    POWER_WATT,
+    TEMP_CELSIUS,
+)
 
 DOMAIN = "senec"
 
@@ -809,5 +817,4 @@ SENSOR_TYPES = [
         native_unit_of_measurement=PERCENTAGE,
         state_class=SensorStateClass.MEASUREMENT,
     ),
-
 ]
