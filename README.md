@@ -4,6 +4,8 @@
 
 ### Hacs
 
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
+
 - Install [Home Assistant Community Store (HACS)](https://hacs.xyz/)
 - Add custom repository https://github.com/mchwalisz/home-assistant-senec to HACS
 - Add integration repository (search for "Senec" in "Explore & Download Repositories")
