@@ -1,9 +1,9 @@
 {
-    "name": "Senec solar system sensor",
-    "country": ["DE"],
-    "domains": ["sensor"],
-    "homeassistant": "2021.12.8",
-    "hacs": "1.18.0",
-    "render_readme": true,
-    "iot_class": ["Assumed State", "Local Pull"]
-  }
+  "name": "Senec solar system sensor",
+  "country": [
+    "DE"
+  ],
+  "homeassistant": "2021.12.8",
+  "hacs": "1.18.0",
+  "render_readme": true
+}
