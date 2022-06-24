@@ -21,7 +21,7 @@
 #### My Home Assistant (2021.3+)
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=senec)
 
-## Manual
+#### Manual
 Add custom integration using the web interface and follow instruction on screen.
 
 - Go to `Configuration -> Integrations` and add "Senec" integration
