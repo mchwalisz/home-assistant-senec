@@ -16,6 +16,7 @@ DOMAIN = "senec"
 """Default config for Senec."""
 DEFAULT_HOST = "Senec"
 DEFAULT_NAME = "senec"
+DEFAULT_SCAN_INTERVAL = 60
 
 """Fixed constants."""
 SCAN_INTERVAL = timedelta(seconds=60)

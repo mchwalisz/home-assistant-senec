@@ -54,11 +54,12 @@ class SenecDataUpdateCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, session, entry):
         """Initialize."""
         self._host = entry.data[CONF_HOST]
+        self._scan_interval = entry.options[CONF_SCAN_INTERVAL]
         self.senec = Senec(self._host, websession=session)
         self.name = entry.title
         self._entry = entry
 
-        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL)
+        super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=self._scan_interval))
 
     async def _async_update_data(self):
         """Update data via library."""
@@ -80,6 +81,26 @@ async def async_unload_entry(hass, entry):
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
     return unload_ok
+
+async def async_migrate_entry(hass, config_entry: ConfigEntry):
+    """Migrate old entry."""
+    version = config_entry.version
+
+    _LOGGER.info("Migrating from version %s", version)
+
+    if version == 1:
+        # Add scan interval as configurable option
+        data = {**config_entry.data}
+        new_options = {}
+
+        new_options[CONF_SCAN_INTERVAL] = timedelta(seconds=DEFAULT_SCAN_INTERVAL)
+
+        config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=data, options=new_options)
+
+    _LOGGER.info("Migration to version %s successful", config_entry.version)
+
+    return True
 
 
 class SenecEntity(Entity):
