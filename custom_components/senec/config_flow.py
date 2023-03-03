@@ -1,8 +1,9 @@
 """Config flow for senec integration."""
 import logging
-from urllib.parse import ParseResult, urlparse
+from typing import Any
 
 import voluptuous as vol
+from homeassistant.data_entry_flow import FlowResult
 import homeassistant.helpers.config_validation as cv
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_SCAN_INTERVAL
@@ -20,7 +21,9 @@ _LOGGER = logging.getLogger(__name__)
 @callback
 def senec_entries(hass: HomeAssistant):
     """Return the hosts already configured."""
-    return {entry.data[CONF_HOST] for entry in hass.config_entries.async_entries(DOMAIN)}
+    return {
+        entry.data[CONF_HOST] for entry in hass.config_entries.async_entries(DOMAIN)
+    }
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -57,7 +60,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             # set some defaults in case we need to return to the form
             name = slugify(user_input.get(CONF_NAME, DEFAULT_NAME))
             host_entry = user_input.get(CONF_HOST, DEFAULT_HOST)
-            scan_interval = user_input.get(CONF_HOST, DEFAULT_HOST)
+            scan_interval = user_input.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
 
             if scan_interval < 5:
                 self._errors[CONF_SCAN_INTERVAL] = "scan interval too low"
@@ -65,7 +68,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 self._errors[CONF_HOST] = "already_configured"
             else:
                 if await self._test_connection(host_entry):
-                    return self.async_create_entry(title=name, data={CONF_HOST: host_entry}, options={CONF_SCAN_INTERVAL: scan_interval})
+                    return self.async_create_entry(
+                        title=name,
+                        data={CONF_HOST: host_entry},
+                        options={CONF_SCAN_INTERVAL: scan_interval},
+                    )
         else:
             user_input = {}
             user_input[CONF_NAME] = DEFAULT_NAME
@@ -76,9 +83,18 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema(
                 {
-                    vol.Required(CONF_NAME, default=user_input.get(CONF_NAME, DEFAULT_NAME)): str,
-                    vol.Required(CONF_HOST, default=user_input.get(CONF_HOST, DEFAULT_HOST)): str,
-                    vol.Required(CONF_SCAN_INTERVAL, default=user_input.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)): cv.positive_int,
+                    vol.Required(
+                        CONF_NAME, default=user_input.get(CONF_NAME, DEFAULT_NAME)
+                    ): str,
+                    vol.Required(
+                        CONF_HOST, default=user_input.get(CONF_HOST, DEFAULT_HOST)
+                    ): str,
+                    vol.Required(
+                        CONF_SCAN_INTERVAL,
+                        default=user_input.get(
+                            CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
+                        ),
+                    ): cv.positive_int,
                 }
             ),
             errors=self._errors,
@@ -91,3 +107,42 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if self._host_in_configuration_exists(host_entry):
             return self.async_abort(reason="already_configured")
         return await self.async_step_user(user_input)
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        config_entry: config_entries.ConfigEntry,
+    ) -> config_entries.OptionsFlow:
+        """Create the options flow."""
+        return SenecOptionsFlowHandler(config_entry)
+
+
+class SenecOptionsFlowHandler(config_entries.OptionsFlow):
+    """Senec config flow options handler."""
+
+    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
+        """Initialize Senec options flow."""
+
+        self.config_entry = config_entry
+        self.options = dict(config_entry.options)
+        self._errors = {}
+
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Manage the options."""
+
+        if user_input is not None:
+            return self.async_create_entry(title="", data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        CONF_SCAN_INTERVAL,
+                        default=self.options[CONF_SCAN_INTERVAL],
+                    ): cv.positive_int,
+                }
+            ),
+        )
