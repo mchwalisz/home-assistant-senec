@@ -1,14 +1,16 @@
 """Constants for the Senec integration."""
-from collections import namedtuple
-from datetime import timedelta
-from typing import Final
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntityDescription,
     SensorStateClass,
 )
-from homeassistant.const import ENERGY_KILO_WATT_HOUR, PERCENTAGE, POWER_WATT, TEMP_CELSIUS
+from homeassistant.const import (
+    ENERGY_KILO_WATT_HOUR,
+    PERCENTAGE,
+    POWER_WATT,
+    TEMP_CELSIUS,
+)
 
 DOMAIN = "senec"
 
@@ -16,9 +18,7 @@ DOMAIN = "senec"
 """Default config for Senec."""
 DEFAULT_HOST = "Senec"
 DEFAULT_NAME = "senec"
-
-"""Fixed constants."""
-SCAN_INTERVAL = timedelta(seconds=60)
+DEFAULT_SCAN_INTERVAL = 60
 
 """Supported sensor types."""
 

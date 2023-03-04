@@ -1,4 +1,13 @@
 {
+    "options": {
+        "step": {
+            "init": {
+                "data" : {
+                    "scan_interval": "Polling interval (s)"
+                }
+            }
+        }
+    },
     "config": {
         "abort": {
             "already_configured": "Integration is already configured"
@@ -10,7 +19,8 @@
         "step": {
             "user": {
                 "data": {
-                    "host": "IP or hostname of the Senec Device"
+                    "host": "IP or hostname of the Senec Device",
+                    "scan_interval": "Polling interval (s)"
                 }
             }
         }
