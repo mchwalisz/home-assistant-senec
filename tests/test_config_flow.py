@@ -1,4 +1,5 @@
 """Test the senec config flow."""
+
 from homeassistant import config_entries, setup
 from homeassistant.components.senec.config_flow import CannotConnect, InvalidAuth
 from homeassistant.components.senec.const import DOMAIN
