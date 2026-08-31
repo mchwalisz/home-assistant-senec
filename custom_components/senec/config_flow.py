@@ -1,4 +1,5 @@
 """Config flow for senec integration."""
+
 import logging
 from urllib.parse import ParseResult, urlparse
 
