@@ -1,4 +1,5 @@
 """Constants for the Senec integration."""
+
 from collections import namedtuple
 from datetime import timedelta
 from typing import Final
