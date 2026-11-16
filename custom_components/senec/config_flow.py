@@ -1,4 +1,5 @@
 """Config flow for senec integration."""
+
 import logging
 from urllib.parse import ParseResult, urlparse
 
@@ -10,8 +11,7 @@ from homeassistant.util import slugify
 from pysenec import Senec
 from requests.exceptions import HTTPError, Timeout
 
-from .const import DOMAIN  # pylint:disable=unused-import
-from .const import DEFAULT_HOST, DEFAULT_NAME
+from .const import DEFAULT_HOST, DEFAULT_NAME, DOMAIN  # pylint:disable=unused-import
 
 _LOGGER = logging.getLogger(__name__)
 
