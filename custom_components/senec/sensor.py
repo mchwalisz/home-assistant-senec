@@ -1,4 +1,5 @@
 """Platform for Senec sensors."""
+
 import logging
 
 import homeassistant.helpers.config_validation as cv
